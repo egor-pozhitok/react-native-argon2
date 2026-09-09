@@ -18,4 +18,10 @@ Pod::Spec.new do |s|
 
   s.dependency 'React-Core'
   s.dependency 'Argon2Swift', '~> 1.0'
+
+  # Argon2Swift's Swift interface depends on the C module `argon2`, declared in a modulemap under its own sources. 
+  # With explicit modules the importing target has to resolve that dependency too, so point this target at the same directory.
+  s.pod_target_xcconfig = {
+    'SWIFT_INCLUDE_PATHS' => '"$(PODS_ROOT)/Argon2Swift/Sources/Modules"'
+  }
 end
